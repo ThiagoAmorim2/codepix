@@ -1,5 +1,6 @@
 package com.desafios.domain.model;
 
+import java.io.Serializable;
 import java.time.LocalDate;
 import java.util.List;
 import java.util.UUID;
@@ -12,14 +13,18 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
+import lombok.Getter;
+import lombok.Setter;
 
 @Entity
 @Table(name = "tb_bank")
-public class Bank {
+@Getter
+@Setter
+public class Bank implements Serializable{
 	@Id
-	@GeneratedValue(strategy = GenerationType.UUID)
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "bank_id", unique = true)
-	private UUID bankId;
+	private Long bankId;
 	
 	@Column(name = "created_at", nullable = false)
 	private LocalDate createdAt;
