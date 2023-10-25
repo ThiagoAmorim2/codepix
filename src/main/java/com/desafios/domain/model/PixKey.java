@@ -1,5 +1,6 @@
 package com.desafios.domain.model;
 
+import java.io.Serializable;
 import java.time.LocalDate;
 import java.util.UUID;
 
@@ -8,16 +9,22 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
+import lombok.Getter;
+import lombok.Setter;
 
 @Entity
 @Table(name = "tb_pixKey")
-public class PixKey {
+@Getter
+@Setter
+public class PixKey implements Serializable{
+	
 	@Id
-	@GeneratedValue(strategy = GenerationType.UUID)
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "pix_key_id", unique = true)
-	private UUID pixKeyId;
+	private Long pixKeyId;
 	
 	@Column(name = "created_at", nullable = false)
 	private LocalDate createdAt;
@@ -31,8 +38,7 @@ public class PixKey {
 	@Column(name = "key", nullable = false, unique = true)
 	private String key;
 	
-	@Column(name = "account", unique = true)
 	@ManyToOne
-	private String account;
-	
+	@JoinColumn(name = "account")
+	private Account account;
 }

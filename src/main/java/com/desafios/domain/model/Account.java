@@ -1,5 +1,6 @@
 package com.desafios.domain.model;
 
+import java.io.Serializable;
 import java.time.LocalDate;
 import java.util.List;
 import java.util.UUID;
@@ -10,17 +11,22 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
+import lombok.Getter;
+import lombok.Setter;
 
 @Entity
 @Table(name = "tb_account")
-public class Account {
+@Getter
+@Setter
+public class Account implements Serializable{
 	@Id
-	@GeneratedValue(strategy = GenerationType.UUID)
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "account_id", unique = true)
-	private UUID accountId;
+	private Long accountId;
 	
 	@Column(name = "created_at", nullable = false)
 	private LocalDate createdAt;
@@ -31,7 +37,7 @@ public class Account {
 	@Column(name = "ownerName", nullable = false)
 	private String ownerName;
 	
-	@Column(name = "bank", nullable = false)
+	@JoinColumn(name = "bank", nullable = false)
 	@ManyToOne
 	private Bank bank;
 	
@@ -41,7 +47,7 @@ public class Account {
 	@Column(name = "number", nullable = false)
 	private String number;
 	
-	@Column(name = "pix_keys", unique = true)
-	@OneToMany(mappedBy = "account", cascade = CascadeType.ALL)
+	@Column(name = "pix_keys")
+	@OneToMany(mappedBy = "key", cascade = CascadeType.ALL, orphanRemoval = true)
 	private List<PixKey> pixKeys;
 }
