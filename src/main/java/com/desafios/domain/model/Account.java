@@ -23,6 +23,7 @@ import lombok.Setter;
 @Getter
 @Setter
 public class Account implements Serializable{
+	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "account_id", unique = true)
@@ -47,7 +48,6 @@ public class Account implements Serializable{
 	@Column(name = "number", nullable = false)
 	private String number;
 	
-	@Column(name = "pix_keys")
-	@OneToMany(mappedBy = "key", cascade = CascadeType.ALL, orphanRemoval = true)
+	@OneToMany(mappedBy = "account", cascade = CascadeType.ALL, orphanRemoval = true)
 	private List<PixKey> pixKeys;
 }

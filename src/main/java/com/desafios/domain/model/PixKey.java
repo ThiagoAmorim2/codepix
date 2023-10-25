@@ -23,7 +23,7 @@ public class PixKey implements Serializable{
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	@Column(name = "pix_key_id", unique = true)
+	@Column(name = "pixkey_id", unique = true)
 	private Long pixKeyId;
 	
 	@Column(name = "created_at", nullable = false)
@@ -35,10 +35,10 @@ public class PixKey implements Serializable{
 	@Column(name = "kind", nullable = false)
 	private String kind;
 	
-	@Column(name = "key", nullable = false, unique = true)
+	@Column(name = "keyPix", nullable = false, unique = true)
 	private String key;
 	
 	@ManyToOne
-	@JoinColumn(name = "account")
+	@JoinColumn(name = "account_id")
 	private Account account;
 }

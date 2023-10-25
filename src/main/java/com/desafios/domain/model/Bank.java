@@ -21,6 +21,7 @@ import lombok.Setter;
 @Getter
 @Setter
 public class Bank implements Serializable{
+	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "bank_id", unique = true)
